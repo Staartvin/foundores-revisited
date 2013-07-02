@@ -1,0 +1,66 @@
+name: FoundOres Revisited
+author: Staartvin
+website: http://dev.bukkit.org/server-mods/foundores-revisited/
+main: Staartvin.FoundOres.FoundOres
+version: 1.7.1
+description: Adds the ability to check what players mined!
+database: true
+permissions:
+    foundores.check:
+        description: Allows a player to check a player's ratio.
+        default: op
+    foundores.purge:
+        description: Allows a player to purge the database.
+        default: op
+    foundores.clear:
+        description: Allows a player to reset the ratio for someone.
+        default: op
+    foundores.materials:
+        description: Allows a player to view the materials used for checking tops.
+        default: op
+    foundores.top:
+        description: Allows a player to get a leaderboard on a certain block.
+        default: op
+    foundores.report:
+        description: Allows a player to create a report.
+        default: op
+    foundores.list:
+        description: Allows a player to get a list of checked players.
+        default: op
+    foundores.notice:
+        description: A player with this permission will get noticed when a player breaks a certain block.
+        default: op
+    foundores.remove:
+        description: Allows a player to totally remove a player from all lists.
+        default: op
+    foundores.forcesave:
+        description: Allows a player to force a save.
+        default: op
+    foundores.reload:
+        description: Allows a player to force a reload.
+        default: op
+    foundores.exempt.lightlevel:
+        description: A player given this permission will not be stopped from breaking blocks in low light.
+        default: op
+    foundores.exempt.noticeable:
+        description: When a player with this permission breaks a block which should be noticed, it won't.
+        default: op
+    foundores.exempt.*:
+        description: A player given this permission will not be logged for anything.
+        children:
+            foundores.exempt.noticeable: true
+            foundores.exempt.lightlevel: true
+    foundores.updateMySQL:
+        description: Allows a player to force a MySQL update.
+        default: op
+    foundores.noticeonupdate:
+        description: A player with this permission will get noticed when a new version of FoundOres is available.
+        default: op
+    foundores.update:
+        description: Allows a player to update to a new version of FoundOres.
+        default: op
+commands:
+    foundores:
+      description: Used for everything of FoundOres Revisited.
+      usage: /<command>
+      aliases: [fo]
