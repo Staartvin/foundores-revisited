@@ -63,4 +63,4 @@ commands:
     foundores:
       description: Used for everything of FoundOres Revisited.
       usage: /<command>
-      aliases: [fo]
+      aliases: [fo, fores, foundo]
