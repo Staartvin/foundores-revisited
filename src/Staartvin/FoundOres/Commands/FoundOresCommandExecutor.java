@@ -26,21 +26,20 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String commandlabel, String[] args) {
-		
+
 		String command = "";
-		
-		for (int i=0; i<args.length;i++) {
+
+		for (int i = 0; i < args.length; i++) {
 			String argument = args[i];
 			if (i == args.length - 1) {
-				command = command.concat(argument);	
-			}
-			else {
+				command = command.concat(argument);
+			} else {
 				command = command.concat(argument + " ");
 			}
 		}
-		
+
 		logCommand(command, sender);
-		
+
 		if (args.length == 3) {
 			if (args[0].equalsIgnoreCase("clear")) {
 				if (!plugin.methods.hasPermission("foundores.clear", sender)) {
@@ -97,11 +96,12 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 					return true;
 				}
 				List<String> leaderboard = leaderBoard
-						.sortLeaderboard(leaderBoard.createLeaderboard(
-								args[1], worldName));
-				
+						.sortLeaderboard(leaderBoard.createLeaderboard(args[1],
+								worldName));
+
 				if (leaderboard == null || leaderboard.size() <= 0) {
-					sender.sendMessage(ChatColor.RED + "This is not a valid leaderboard. Is the world logged?");
+					sender.sendMessage(ChatColor.RED
+							+ "This is not a valid leaderboard. Is the world logged?");
 					return true;
 				}
 				leaderBoard.showLeaderboard(leaderboard, sender, worldName,
@@ -203,15 +203,16 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 					return true;
 				}
 				List<String> leaderboard = leaderBoard
-						.sortLeaderboard(leaderBoard.createLeaderboard(
-								args[1], player.getWorld().getName()));
-				
+						.sortLeaderboard(leaderBoard.createLeaderboard(args[1],
+								player.getWorld().getName()));
+
 				if (leaderboard == null || leaderboard.size() <= 0) {
-					sender.sendMessage(ChatColor.RED + "This is not a valid leaderboard. Is the world logged?");
+					sender.sendMessage(ChatColor.RED
+							+ "This is not a valid leaderboard. Is the world logged?");
 					return true;
 				}
-				leaderBoard.showLeaderboard(leaderboard, sender,
-						player.getWorld().getName(), args[1]);
+				leaderBoard.showLeaderboard(leaderboard, sender, player
+						.getWorld().getName(), args[1]);
 				return true;
 			}
 		} // args.length = 2
@@ -239,6 +240,8 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 						+ "- RilestheGiles for donating 1 dollar");
 				sender.sendMessage(ChatColor.GOLD
 						+ "- FaxionMC for donating 40 dollars!");
+				sender.sendMessage(ChatColor.GOLD
+						+ "- Timo Triisa for donating 30 dollars!");
 				return true;
 			} else if (args[0].equalsIgnoreCase("save")
 					|| args[0].equalsIgnoreCase("forcesave")) {
@@ -287,7 +290,8 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				sender.sendMessage(ChatColor.BLUE
 						+ "-----------------------------------------------------");
 				sender.sendMessage(ChatColor.GREEN + "Creating new report!");
-				sender.sendMessage(ChatColor.GREEN + "This can take up a few minutes depending on your database size.");
+				sender.sendMessage(ChatColor.GREEN
+						+ "This can take up a few minutes depending on your database size.");
 				sender.sendMessage(ChatColor.YELLOW
 						+ "Creating a report may put some heavy load on server for a couple of seconds.");
 				return true;
@@ -345,8 +349,8 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				sender.sendMessage(ChatColor.GOLD + result);
 				return true;
 			} else if (args[0].equalsIgnoreCase("updateMySQL")) {
-				if (!plugin.methods
-						.hasPermission("foundores.updateMySQL", sender)) {
+				if (!plugin.methods.hasPermission("foundores.updateMySQL",
+						sender)) {
 					return true;
 				}
 				sender.sendMessage(ChatColor.RED + "Checking database...");
@@ -354,11 +358,10 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				sender.sendMessage(ChatColor.GREEN + "Database is up-to-date!");
 				return true;
 			} else if (args[0].equalsIgnoreCase("update")) {
-				if (!plugin.methods
-						.hasPermission("foundores.update", sender)) {
+				if (!plugin.methods.hasPermission("foundores.update", sender)) {
 					return true;
 				}
-			
+
 				// Update plugin
 				plugin.updatePlugin(sender);
 				return true;
@@ -389,12 +392,12 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 					+ ChatColor.GRAY + "FoundOres Revisited" + ChatColor.BLUE
 					+ "]------------------");
 			sender.sendMessage(ChatColor.GOLD + "/fo updateMySQL"
-					+ ChatColor.BLUE + " --- Updates MySQL database to latest version");
-			sender.sendMessage(ChatColor.GOLD + "/fo update"
-					+ ChatColor.BLUE + " --- Updates FoundOres to the latest version.");
+					+ ChatColor.BLUE
+					+ " --- Updates MySQL database to latest version");
+			sender.sendMessage(ChatColor.GOLD + "/fo update" + ChatColor.BLUE
+					+ " --- Updates FoundOres to the latest version.");
 			sender.sendMessage(ChatColor.GRAY + "Page 3 of " + maxpages);
-		}
-		else if (page == 2) {
+		} else if (page == 2) {
 			sender.sendMessage(ChatColor.BLUE + "----------------["
 					+ ChatColor.GRAY + "FoundOres Revisited" + ChatColor.BLUE
 					+ "]------------------");
@@ -438,8 +441,9 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 			sender.sendMessage(ChatColor.GRAY + "Page 1 of " + maxpages);
 		}
 	}
-	
+
 	private void logCommand(String command, CommandSender sender) {
-		plugin.log.logToFile(sender.getName() + " performed '/fo " + command + "'", eventTypes.COMMAND);
+		plugin.log.logToFile(sender.getName() + " performed '/fo " + command
+				+ "'", eventTypes.COMMAND);
 	}
 }
