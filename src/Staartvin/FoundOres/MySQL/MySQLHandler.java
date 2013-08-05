@@ -4,6 +4,10 @@ import Staartvin.FoundOres.FoundOres;
 import Staartvin.FoundOres.LogClass.eventTypes;
 import Staartvin.FoundOres.Database.DatabaseConnector;
 
+/**
+ * @author Staartvin
+ *
+ */
 public class MySQLHandler {
 
 	FoundOres plugin;
@@ -29,10 +33,6 @@ public class MySQLHandler {
 
 		getConfigData();
 
-		//System.out.print("Hostname: " + host);
-		//System.out.print("Username: " + user);
-		//System.out.print("Password: " + password);
-		//System.out.print("Database: " + database);
 		mysql = new MySQL(host, user, password, database);
 
 		if (mysql.connect()) {
@@ -45,6 +45,7 @@ public class MySQLHandler {
 	}
 
 	public void constructTables() {
+		// Fixed MySQL connection not staying alive
 		// If the MySQL Connection is somehow closed, open it again.
 		if (mysql.isClosed()) {
 			mysql.connect();
