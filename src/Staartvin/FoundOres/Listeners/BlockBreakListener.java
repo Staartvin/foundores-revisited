@@ -41,14 +41,19 @@ public class BlockBreakListener implements Listener{
 			if (!plugin.methods.checkLightLevel(event, player))
 				return;
 
+			// Log block
 			plugin.log.logToFile("[INFO] PLAYER " + player.getName()
 					+ " has broken " + event.getBlock().getType() + " at "
 					+ event.getBlock().getX() + ", " + event.getBlock().getY()
 					+ ", " + event.getBlock().getZ(), eventTypes.BLOCKBREAK);
+			
+			// Add a new block break action to the queue.
 			plugin.loggedActions.add(playername + ":"
 					+ player.getWorld().getName() + ":" + bid);
 
+			// Notice player of mining
 			plugin.methods.noticePlayeronMine(event.getPlayer());
+			
 			plugin.methods.checkAnnounceMode(playername, bid, player,
 					event.getBlock());
 
