@@ -1,7 +1,7 @@
 name: FoundOres Revisited
 author: Staartvin
 website: http://dev.bukkit.org/server-mods/foundores-revisited/
-main: Staartvin.FoundOres.FoundOres
+main: me.staartvin.foundores.FoundOres
 version: 1.7.1
 description: Adds the ability to check what players mined!
 database: true
