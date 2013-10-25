@@ -41,11 +41,11 @@ public class BlockBreakListener implements Listener {
 		if (bid == 1 || bid == 14 || bid == 15 || bid == 16 || bid == 21
 				|| bid == 56 || bid == 73 || bid == 129 || bid == 153) {
 
-			if (!plugin.methods.checkLightLevel(event, player))
+			if (!plugin.getMethodsClass().checkLightLevel(event, player))
 				return;
 
 			// Log block
-			plugin.log.logToFile("[INFO] PLAYER " + player.getName()
+			plugin.getLogClass().logToFile("[INFO] PLAYER " + player.getName()
 					+ " has broken " + event.getBlock().getType() + " at "
 					+ event.getBlock().getX() + ", " + event.getBlock().getY()
 					+ ", " + event.getBlock().getZ(), eventTypes.BLOCKBREAK);
@@ -55,9 +55,9 @@ public class BlockBreakListener implements Listener {
 					+ player.getWorld().getName() + ":" + bid);
 
 			// Notice player of mining
-			plugin.methods.noticePlayeronMine(event.getPlayer());
+			plugin.getMethodsClass().noticePlayeronMine(event.getPlayer());
 
-			plugin.methods.checkAnnounceMode(playername, bid, player,
+			plugin.getMethodsClass().checkAnnounceMode(playername, bid, player,
 					event.getBlock());
 
 		}

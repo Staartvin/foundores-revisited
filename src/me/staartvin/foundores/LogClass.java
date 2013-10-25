@@ -60,7 +60,7 @@ public class LogClass {
         } catch (IOException e)
         {
             e.printStackTrace();
-            plugin.logger.logNormal("Could not log to the logfile!");
+            plugin.getLoggerClass().logNormal("Could not log to the logfile!");
         }
     }
 }

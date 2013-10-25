@@ -26,18 +26,18 @@ public class IntervalSaves {
 			return;
 		} else {
 			if (saveInterval > 600) {
-				plugin.logger.logNormal("NOTICE: Interval time is set to "
+				plugin.getLoggerClass().logNormal("NOTICE: Interval time is set to "
 						+ saveInterval
 						+ " minutes. Save interval cannot be higher than 600!");
-				plugin.methods.disablePlugin();
+				plugin.getMethodsClass().disablePlugin();
 				return;
 			} else if (saveInterval >= 300) {
-				plugin.logger
+				plugin.getLoggerClass()
 						.logNormal("NOTICE: Interval time is set to "
 								+ saveInterval
 								+ " minutes. A large interval time is not recommended!");
 			} else {
-				plugin.logger.logNormal("Interval time is set to "
+				plugin.getLoggerClass().logNormal("Interval time is set to "
 						+ plugin.getConfig().getInt("SaveInterval")
 						+ " minutes");
 			}
@@ -71,9 +71,9 @@ public class IntervalSaves {
 	protected void saveComplete(Player player) {
 		if (player != null && player.isOnline()) {
 			player.sendMessage(ChatColor.GREEN + "All work saved!");
-			plugin.logger.logVerbose("Save is complete.");
+			plugin.getLoggerClass().logVerbose("Save is complete.");
 		} else {
-			plugin.logger.logVerbose("Save is complete.");
+			plugin.getLoggerClass().logVerbose("Save is complete.");
 		}
 	}
 

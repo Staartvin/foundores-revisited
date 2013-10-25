@@ -15,16 +15,16 @@ public class SaveHandler {
 
 	public void save(String player, String world, int blockID) {
 		// Update local database
-		plugin.dCon.incrementBlockCount(player, world, blockID);
+		plugin.getDatabaseConnector().incrementBlockCount(player, world, blockID);
 		
 		if (plugin.getConfig().getBoolean("MySQL.use")) {
-			plugin.mysqlHandler.incrementBlockCount(world, player, blockID);
+			plugin.getMySQLHandler().incrementBlockCount(world, player, blockID);
 		}
 	}
 	
 	public void forceSave() {
 		ArrayList<String> log = plugin.loggedActions;
-		plugin.logger.debug("Save is forced! (Shutdown)");
+		plugin.getLoggerClass().debug("Save is forced! (Shutdown)");
 		for (int i = 0; i < log.size(); i++) {
 
 			// WE NEED TO WORK WITHOUT A STOP!!!!
@@ -33,13 +33,13 @@ public class SaveHandler {
 			temp = line.split(":");
 
 			// Temp = playerName:World:BlockID
-			plugin.dCon.incrementBlockCount(temp[0], temp[1],
+			plugin.getDatabaseConnector().incrementBlockCount(temp[0], temp[1],
 					Integer.parseInt(temp[2]));
 			
 			// Don't use save() because MySQL takes too long for a shutdown
 			// The data will be saved to the database once the server is started again.
 		}
 		log.clear();
-		plugin.saves.saveProgress = false;
+		plugin.getInternalSaves().saveProgress = false;
 	}
 }

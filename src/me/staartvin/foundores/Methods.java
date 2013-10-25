@@ -43,7 +43,7 @@ public class Methods {
 	public void stopTest() {
 		plugin.lastTime = System.currentTimeMillis();
 		plugin.finalTime = plugin.lastTime - plugin.firstTime;
-		plugin.logger.logVerbose("Load Time: " + plugin.finalTime + "ms ");
+		plugin.getLoggerClass().logVerbose("Load Time: " + plugin.finalTime + "ms ");
 	}
 
 	public boolean hasPermission(String permission, CommandSender sender) {
@@ -64,7 +64,7 @@ public class Methods {
 			world = worlds.get(0).getName();
 		}
 
-		if (plugin.dCon.clearEntry(playerName, world)) {
+		if (plugin.getDatabaseConnector().clearEntry(playerName, world)) {
 			sender.sendMessage(ChatColor.GREEN + "The blockcount of "
 					+ playerName + " has been successfully cleared on world '"
 					+ world + "'.");
@@ -133,65 +133,65 @@ public class Methods {
 		String p8p = df.format(p8);
 		String p9p = df.format(p9);
 
-		if (p2 * 100.0D > plugin.oreRatio.getCoalHigh())
+		if (p2 * 100.0D > plugin.getOreRatioStorage().getCoalHigh())
 			p2p = ChatColor.RED + p2p;
-		else if (p2 * 100.0D > plugin.oreRatio.getCoalLow())
+		else if (p2 * 100.0D > plugin.getOreRatioStorage().getCoalLow())
 			p2p = ChatColor.GOLD + p2p;
 		else {
 			p2p = ChatColor.GREEN + p2p;
 		}
 
-		if (p3 * 100.0D > plugin.oreRatio.getIronHigh())
+		if (p3 * 100.0D > plugin.getOreRatioStorage().getIronHigh())
 			p3p = ChatColor.RED + p3p;
-		else if (p3 * 100.0D > plugin.oreRatio.getIronLow())
+		else if (p3 * 100.0D > plugin.getOreRatioStorage().getIronLow())
 			p3p = ChatColor.GOLD + p3p;
 		else {
 			p3p = ChatColor.GREEN + p3p;
 		}
 
-		if (p4 * 100.0D > plugin.oreRatio.getRedstoneHigh())
+		if (p4 * 100.0D > plugin.getOreRatioStorage().getRedstoneHigh())
 			p4p = ChatColor.RED + p4p;
-		else if (p4 * 100.0D > plugin.oreRatio.getRedstoneLow())
+		else if (p4 * 100.0D > plugin.getOreRatioStorage().getRedstoneLow())
 			p4p = ChatColor.GOLD + p4p;
 		else {
 			p4p = ChatColor.GREEN + p4p;
 		}
 
-		if (p5 * 100.0D > plugin.oreRatio.getGoldHigh())
+		if (p5 * 100.0D > plugin.getOreRatioStorage().getGoldHigh())
 			p5p = ChatColor.RED + p5p;
-		else if (p5 * 100.0D > plugin.oreRatio.getGoldLow())
+		else if (p5 * 100.0D > plugin.getOreRatioStorage().getGoldLow())
 			p5p = ChatColor.GOLD + p5p;
 		else {
 			p5p = ChatColor.GREEN + p5p;
 		}
 
-		if (p6 * 100.0D > plugin.oreRatio.getLapisHigh())
+		if (p6 * 100.0D > plugin.getOreRatioStorage().getLapisHigh())
 			p6p = ChatColor.RED + p6p;
-		else if (p6 * 100.0D > plugin.oreRatio.getLapisLow())
+		else if (p6 * 100.0D > plugin.getOreRatioStorage().getLapisLow())
 			p6p = ChatColor.GOLD + p6p;
 		else {
 			p6p = ChatColor.GREEN + p6p;
 		}
 
-		if (p7 * 100.0D > plugin.oreRatio.getDiamondHigh())
+		if (p7 * 100.0D > plugin.getOreRatioStorage().getDiamondHigh())
 			p7p = ChatColor.RED + p7p;
-		else if (p7 * 100.0D > plugin.oreRatio.getDiamondLow())
+		else if (p7 * 100.0D > plugin.getOreRatioStorage().getDiamondLow())
 			p7p = ChatColor.GOLD + p7p;
 		else {
 			p7p = ChatColor.GREEN + p7p;
 		}
 
-		if (p8 * 100.0D > plugin.oreRatio.getEmeraldHigh())
+		if (p8 * 100.0D > plugin.getOreRatioStorage().getEmeraldHigh())
 			p8p = ChatColor.RED + p8p;
-		else if (p8 * 100.0D > plugin.oreRatio.getEmeraldLow())
+		else if (p8 * 100.0D > plugin.getOreRatioStorage().getEmeraldLow())
 			p8p = ChatColor.GOLD + p8p;
 		else {
 			p8p = ChatColor.GREEN + p8p;
 		}
 
-		if (p9 * 100.0D > plugin.oreRatio.getNetherquartzHigh())
+		if (p9 * 100.0D > plugin.getOreRatioStorage().getNetherquartzHigh())
 			p9p = ChatColor.RED + p9p;
-		else if (p8 * 100.0D > plugin.oreRatio.getNetherquartzLow())
+		else if (p8 * 100.0D > plugin.getOreRatioStorage().getNetherquartzLow())
 			p9p = ChatColor.GOLD + p9p;
 		else {
 			p9p = ChatColor.GREEN + p9p;
@@ -319,7 +319,7 @@ public class Methods {
 	public boolean checkLightLevel(BlockBreakEvent event, Player player) {
 		if (!plugin.getConfig().getBoolean("allowLowLightMining")) {
 			if (event.getBlock().getY() <= 60) {
-				if (plugin.methods.getLightLevel(event.getBlock()) <= plugin
+				if (plugin.getMethodsClass().getLightLevel(event.getBlock()) <= plugin
 						.getConfig().getInt("LightLevelDenial")) {
 					if (player.hasPermission("foundores.exempt.lightlevel")) {
 						return true;

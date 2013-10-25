@@ -40,9 +40,9 @@ public class SaveTask extends BukkitRunnable {
 		// Just a message setup
 		if (firstSave) {
 			if (playerName == null) {
-				plugin.logger.logVerbose("Saving all data...");
+				plugin.getLoggerClass().logVerbose("Saving all data...");
 			} else {
-				plugin.logger.logVerbose(playerName + " has forced a save!");
+				plugin.getLoggerClass().logVerbose(playerName + " has forced a save!");
 			}
 		}
 
@@ -53,11 +53,11 @@ public class SaveTask extends BukkitRunnable {
 			return;
 		}
 		saves.saveProgress = true;
-		plugin.logger.debug("Saving " + log.size() + " items.");
+		plugin.getLoggerClass().debug("Saving " + log.size() + " items.");
 		
 		// Force save routine (On shutdown)
 		if (forceSave) {
-			plugin.logger.debug("Save is forced! (Shutdown)");
+			plugin.getLoggerClass().debug("Save is forced! (Shutdown)");
 			for (int i = 0; i < log.size(); i++) {
 
 				// WE NEED TO WORK WITHOUT A STOP!!!!
@@ -66,7 +66,7 @@ public class SaveTask extends BukkitRunnable {
 				temp = line.split(":");
 
 				// Temp = playerName:World:BlockID
-				plugin.saveHandler.save(temp[0], temp[1],
+				plugin.getSaveHandler().save(temp[0], temp[1],
 						Integer.parseInt(temp[2]));
 				//plugin.loadFiles.getDataConfig().set(temp[1] + "." + temp[0] + "." + temp[2], Integer.valueOf(plugin.loadFiles.getDataConfig().getInt(temp[1] + "." + temp[0] + "." + temp[2]) + 1));
 				//plugin.loadFiles.saveDataConfig();
@@ -84,12 +84,12 @@ public class SaveTask extends BukkitRunnable {
 				String[] temp;
 				temp = line.split(":");
 				// Temp = playerName:World:BlockID
-				plugin.saveHandler.save(temp[0], temp[1],
+				plugin.getSaveHandler().save(temp[0], temp[1],
 						Integer.parseInt(temp[2]));
 				//plugin.loadFiles.getDataConfig().set(temp[1] + "." + temp[0] + "." + temp[2], Integer.valueOf(plugin.loadFiles.getDataConfig().getInt(temp[1] + "." + temp[0] + "." + temp[2]) + 1));
 				//plugin.loadFiles.saveDataConfig();
 			}
-			plugin.logger.debug("Quick saving to the end..");
+			plugin.getLoggerClass().debug("Quick saving to the end..");
 			log.clear();
 			saves.saveComplete(player);
 			saves.saveProgress = false;
@@ -101,14 +101,14 @@ public class SaveTask extends BukkitRunnable {
 
 			// We have done enough work for this time! Let's take a short break.
 			if (workCounter > Math.ceil(log.size() / 4)) {
-				plugin.logger.debug("Saved " + stbr.size()
+				plugin.getLoggerClass().debug("Saved " + stbr.size()
 						+ " items this round!");
 
 				for (int j = 0; j < stbr.size(); j++) {
 					plugin.loggedActions.remove(stbr.get(j));
 				}
 				saves.letsWork(playerName, player);
-				plugin.logger.debug("Total size of logged actions: "
+				plugin.getLoggerClass().debug("Total size of logged actions: "
 						+ plugin.loggedActions.size());
 				return;
 			}
@@ -122,7 +122,7 @@ public class SaveTask extends BukkitRunnable {
 			workCounter++;
 
 			// Temp = playerName:World:BlockID
-			plugin.saveHandler.save(temp[0], temp[1],
+			plugin.getSaveHandler().save(temp[0], temp[1],
 					Integer.parseInt(temp[2]));
 			//plugin.loadFiles.getDataConfig().set(temp[1] + "." + temp[0] + "." + temp[2], Integer.valueOf(plugin.loadFiles.getDataConfig().getInt(temp[1] + "." + temp[0] + "." + temp[2]) + 1));
 			//plugin.loadFiles.saveDataConfig();

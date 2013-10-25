@@ -43,7 +43,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 
 		if (args.length == 3) {
 			if (args[0].equalsIgnoreCase("clear")) {
-				if (!plugin.methods.hasPermission("foundores.clear", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.clear", sender)) {
 					return true;
 				}
 				if (plugin.getServer().getWorld(args[2]) == null) {
@@ -53,10 +53,10 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "' could not be found! Worlds are case sensitive!");
 					return true;
 				}
-				plugin.methods.clearBlockCount(args[1], sender, args[2]);
+				plugin.getMethodsClass().clearBlockCount(args[1], sender, args[2]);
 				return true;
 			} else if (args[0].equalsIgnoreCase("check")) {
-				if (!plugin.methods.hasPermission("foundores.check", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.check", sender)) {
 					return true;
 				}
 				if (plugin.getServer().getWorld(args[2]) == null) {
@@ -66,11 +66,11 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "' could not be found! Worlds are case sensitive!");
 					return true;
 				}
-				plugin.methods.calculateBlockCount(args[1], sender, plugin
+				plugin.getMethodsClass().calculateBlockCount(args[1], sender, plugin
 						.getServer().getWorld(args[2]).getName());
 				return true;
 			} else if (args[0].equalsIgnoreCase("top")) {
-				if (!plugin.methods.hasPermission("foundores.top", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.top", sender)) {
 					return true;
 				}
 
@@ -90,7 +90,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "Do '/fo materials' to get a list of materials!");
 					return true;
 				}
-				String worldName = plugin.methods.matchWorlds(args[2]);
+				String worldName = plugin.getMethodsClass().matchWorlds(args[2]);
 				if (worldName == null) {
 					sender.sendMessage(ChatColor.RED + "World '" + args[2]
 							+ "' could not be found!");
@@ -112,7 +112,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 		} // args.length = 3
 		else if (args.length == 2) {
 			if (args[0].equalsIgnoreCase("check")) {
-				if (!plugin.methods.hasPermission("foundores.check", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.check", sender)) {
 					return true;
 				}
 				Player player;
@@ -129,18 +129,18 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "ERROR: Could not find world location!");
 					return true;
 				}
-				plugin.methods.calculateBlockCount(args[1], sender, player
+				plugin.getMethodsClass().calculateBlockCount(args[1], sender, player
 						.getWorld().getName());
 				return true;
 			} else if (args[0].equalsIgnoreCase("remove")) {
-				if (!plugin.methods.hasPermission("foundores.remove", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.remove", sender)) {
 					return true;
 				}
 				sender.sendMessage(ChatColor.RED
 						+ "This command is not stable yet. Use of it is denied.");
 				return true;
 			} else if (args[0].equalsIgnoreCase("clear")) {
-				if (!plugin.methods.hasPermission("foundores.clear", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.clear", sender)) {
 					return true;
 				}
 				Player player;
@@ -156,7 +156,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "ERROR: Could not find world location!");
 					return true;
 				}
-				plugin.methods.clearBlockCount(args[1], sender, player
+				plugin.getMethodsClass().clearBlockCount(args[1], sender, player
 						.getWorld().getName());
 				return true;
 			} else if (args[0].equalsIgnoreCase("help")) {
@@ -172,7 +172,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				showHelpPages(sender, page);
 				return true;
 			} else if (args[0].equalsIgnoreCase("top")) {
-				if (!plugin.methods.hasPermission("foundores.top", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.top", sender)) {
 					return true;
 				}
 				boolean isValid = false;
@@ -246,21 +246,21 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				return true;
 			} else if (args[0].equalsIgnoreCase("save")
 					|| args[0].equalsIgnoreCase("forcesave")) {
-				if (!plugin.methods
+				if (!plugin.getMethodsClass()
 						.hasPermission("foundores.forcesave", sender)) {
 					return true;
 				}
-				if (plugin.saves.saveProgress) {
+				if (plugin.getInternalSaves().saveProgress) {
 					sender.sendMessage(ChatColor.RED
 							+ "Cannot start a save, there is already a save running.");
 					return true;
 				}
 				sender.sendMessage(ChatColor.GREEN + "Starting save...");
-				plugin.saves.save(sender.getName(), true, false, plugin
+				plugin.getInternalSaves().save(sender.getName(), true, false, plugin
 						.getServer().getPlayer(sender.getName()));
 				return true;
 			} else if (args[0].equalsIgnoreCase("reload")) {
-				if (!plugin.methods.hasPermission("foundores.reload", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.reload", sender)) {
 					return true;
 				}
 				plugin.reloadConfig();
@@ -273,7 +273,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 						+ "You successfully reloaded FO:RE.");
 				return true;
 			} else if (args[0].equalsIgnoreCase("list")) {
-				if (!plugin.methods.hasPermission("foundores.list", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.list", sender)) {
 					return true;
 				}
 				sender.sendMessage(ChatColor.RED
@@ -282,7 +282,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				//+ "-----------------------------------------------------");
 				return true;
 			} else if (args[0].equalsIgnoreCase("report")) {
-				if (!plugin.methods.hasPermission("foundores.report", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.report", sender)) {
 					return true;
 				}
 				// Run creating of a report async.
@@ -297,7 +297,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 						+ "Creating a report may put some heavy load on server for a couple of seconds.");
 				return true;
 			} else if (args[0].equalsIgnoreCase("check")) {
-				if (!plugin.methods.hasPermission("foundores.check", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.check", sender)) {
 					return true;
 				}
 				Player player;
@@ -314,11 +314,11 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "ERROR: Could not find world location!");
 					return true;
 				}
-				plugin.methods.calculateBlockCount(sender.getName(), sender,
+				plugin.getMethodsClass().calculateBlockCount(sender.getName(), sender,
 						player.getWorld().getName());
 				return true;
 			} else if (args[0].equalsIgnoreCase("purge")) {
-				if (!plugin.methods.hasPermission("foundores.purge", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.purge", sender)) {
 					return true;
 				}
 				if (plugin.getServer().getOnlinePlayers().length >= 1) {
@@ -328,12 +328,12 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				}
 				sender.sendMessage(ChatColor.GREEN
 						+ "Database of FoundOres has been successfully purged with "
-						+ plugin.dCon.purgeDatabase() + " items!");
-				plugin.logger.logNormal(sender.getName()
+						+ plugin.getDatabaseConnector().purgeDatabase() + " items!");
+				plugin.getLoggerClass().logNormal(sender.getName()
 						+ " has purged the database!");
 				return true;
 			} else if (args[0].equalsIgnoreCase("materials")) {
-				if (!plugin.methods
+				if (!plugin.getMethodsClass()
 						.hasPermission("foundores.materials", sender)) {
 					return true;
 				}
@@ -350,16 +350,16 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				sender.sendMessage(ChatColor.GOLD + result);
 				return true;
 			} else if (args[0].equalsIgnoreCase("updateMySQL")) {
-				if (!plugin.methods.hasPermission("foundores.updateMySQL",
+				if (!plugin.getMethodsClass().hasPermission("foundores.updateMySQL",
 						sender)) {
 					return true;
 				}
 				sender.sendMessage(ChatColor.RED + "Checking database...");
-				plugin.mysqlHandler.updateToLatestMinecraftVersion();
+				plugin.getMySQLHandler().updateToLatestMinecraftVersion();
 				sender.sendMessage(ChatColor.GREEN + "Database is up-to-date!");
 				return true;
 			} else if (args[0].equalsIgnoreCase("update")) {
-				if (!plugin.methods.hasPermission("foundores.update", sender)) {
+				if (!plugin.getMethodsClass().hasPermission("foundores.update", sender)) {
 					return true;
 				}
 
@@ -444,7 +444,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 	}
 
 	private void logCommand(String command, CommandSender sender) {
-		plugin.log.logToFile(sender.getName() + " performed '/fo " + command
+		plugin.getLogClass().logToFile(sender.getName() + " performed '/fo " + command
 				+ "'", eventTypes.COMMAND);
 	}
 }

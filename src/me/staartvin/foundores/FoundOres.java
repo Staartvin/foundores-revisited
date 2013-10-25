@@ -24,24 +24,24 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 
 public class FoundOres extends JavaPlugin {
 
 	// Push to GitHub
-	public IntervalSaves saves = new IntervalSaves(this);
-	public Logger logger = new Logger(this);
-	public Methods methods = new Methods(this);
-	public API api = new API(this);
-	public DatabaseConnector dCon = new DatabaseConnector(this);
-	public LogClass log = new LogClass(this);
-	public OreRatios oreRatio = new OreRatios();
-	public MySQLHandler mysqlHandler = new MySQLHandler(this);
-	public SaveHandler saveHandler = new SaveHandler(this);
+	private IntervalSaves saves = new IntervalSaves(this);
+	private Logger logger = new Logger(this);
+	private Methods methods = new Methods(this);
+	private API api = new API(this);
+	private DatabaseConnector dCon = new DatabaseConnector(this);
+	private LogClass log = new LogClass(this);
+	private OreRatios oreRatio = new OreRatios();
+	private MySQLHandler mysqlHandler = new MySQLHandler(this);
+	private SaveHandler saveHandler = new SaveHandler(this);
+	
 	public ArrayList<String> loggedActions = new ArrayList<String>();
-	public Updater updater;
-	public BukkitTask autoUpdateTask;
+	private Updater updater;
+	//private BukkitTask autoUpdateTask;
 
 	public HashMap<String, Boolean> hasReceived = new HashMap<String, Boolean>();
 	public HashMap<String, Boolean> mineVerify = new HashMap<String, Boolean>();
@@ -102,7 +102,7 @@ public class FoundOres extends JavaPlugin {
 		
 		// Schedule a check every x minutes
 		if (getConfig().getBoolean("Updater.doAutoUpdate")) {
-			autoUpdateTask = new AutoUpdateTask(this).runTaskTimerAsynchronously(this, 600L, getConfig().getInt("Updater.autoUpdateIntervalTimer") * 1200);
+			new AutoUpdateTask(this).runTaskTimerAsynchronously(this, 600L, getConfig().getInt("Updater.autoUpdateIntervalTimer") * 1200);
 		}
 
 		logger.logNormal("FoundOres Revisited v"
@@ -198,5 +198,41 @@ public class FoundOres extends JavaPlugin {
 				break;
 		}
 		return false;
+	}
+	
+	public Logger getLoggerClass() {
+		return logger;
+	}
+	
+	public DatabaseConnector getDatabaseConnector() {
+		return dCon;
+	}
+	
+	public OreRatios getOreRatioStorage() {
+		return oreRatio;
+	}
+	
+	public Methods getMethodsClass() {
+		return methods;
+	}
+	
+	public MySQLHandler getMySQLHandler() {
+		return mysqlHandler;
+	}
+	
+	public LogClass getLogClass() {
+		return log;
+	}
+	
+	public IntervalSaves getInternalSaves() {
+		return saves;
+	}
+	
+	public Updater getUpdater() {
+		return updater;
+	}
+	
+	public SaveHandler getSaveHandler() {
+		return saveHandler;
 	}
 }

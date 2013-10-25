@@ -19,39 +19,39 @@ public class API {
 	}
 	
 	public Integer getBrokenStone(String playerName, String world) {
-		return plugin.dCon.getBrokenStone(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenStone(playerName, world);
 	}
 	
 	public Integer getBrokenCoal(String playerName, String world) {
-		return plugin.dCon.getBrokenCoal(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenCoal(playerName, world);
 	}
 	
 	public Integer getBrokenIron(String playerName, String world) {
-		return plugin.dCon.getBrokenIron(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenIron(playerName, world);
 	}
 	
 	public Integer getBrokenGold(String playerName, String world) {
-		return plugin.dCon.getBrokenGold(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenGold(playerName, world);
 	}
 	
 	public Integer getBrokenRedstone(String playerName, String world) {
-		return plugin.dCon.getBrokenRedstone(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenRedstone(playerName, world);
 	}
 	
 	public Integer getBrokenLapisLazuli(String playerName, String world) {
-		return plugin.dCon.getBrokenLapisLazuli(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenLapisLazuli(playerName, world);
 	}
 	
 	public Integer getBrokenDiamond(String playerName, String world) {
-		return plugin.dCon.getBrokenDiamond(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenDiamond(playerName, world);
 	}
 	
 	public Integer getBrokenEmerald(String playerName, String world) {
-		return plugin.dCon.getBrokenEmerald(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenEmerald(playerName, world);
 	}
 	
 	public Integer getBrokenNetherQuartz(String playerName, String world) {
-		return plugin.dCon.getBrokenNetherQuartz(playerName, world);
+		return plugin.getDatabaseConnector().getBrokenNetherQuartz(playerName, world);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class API {
 	 * @return true if player is logged on given world
 	 */
 	public boolean isLogged(String playerName, String world) {
-		return plugin.dCon.isLogged(playerName, world);
+		return plugin.getDatabaseConnector().isLogged(playerName, world);
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class API {
 	 * @return false if no entry was found
 	 */
 	public boolean clearEntry(String playerName, String world) {
-		return plugin.dCon.clearEntry(playerName, world);
+		return plugin.getDatabaseConnector().clearEntry(playerName, world);
 	}
 	
 	/**
@@ -83,6 +83,6 @@ public class API {
 	 * @return false if entry already exists
 	 */
 	public boolean createNewEntry(String playerName, String world) {
-		return plugin.dCon.createNewEntry(playerName, world);
+		return plugin.getDatabaseConnector().createNewEntry(playerName, world);
 	}
 }

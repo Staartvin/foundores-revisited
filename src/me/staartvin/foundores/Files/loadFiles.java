@@ -86,7 +86,7 @@ public class loadFiles {
 		config.addDefault("Updater.autoUpdateIntervalTimer", 60);
 
 
-		plugin.logger.logVerbose("Connecting to database...");
+		plugin.getLoggerClass().logVerbose("Connecting to database...");
 
 		config.options().copyDefaults(true);
 		plugin.saveConfig();

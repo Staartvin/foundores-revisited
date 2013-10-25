@@ -20,13 +20,13 @@ public class PlayerJoinListener implements Listener {
 	@EventHandler
 	protected void onPlayerJoin(final PlayerJoinEvent event) {
 		World world = event.getPlayer().getLocation().getWorld();
-		if (!plugin.dCon.isLogged(event.getPlayer().getName(), world.getName())) {
-			plugin.logger.logVerbose("I don't recognise "
+		if (!plugin.getDatabaseConnector().isLogged(event.getPlayer().getName(), world.getName())) {
+			plugin.getLoggerClass().logVerbose("I don't recognise "
 					+ event.getPlayer().getName() + "!");
-			plugin.logger.logVerbose("Creating info about "
+			plugin.getLoggerClass().logVerbose("Creating info about "
 					+ event.getPlayer().getName() + "...");
 			for (World worlds : plugin.getServer().getWorlds()) {
-				plugin.dCon.createNewEntry(event.getPlayer().getName(),
+				plugin.getDatabaseConnector().createNewEntry(event.getPlayer().getName(),
 						worlds.getName());
 			}
 		}
@@ -41,7 +41,7 @@ public class PlayerJoinListener implements Listener {
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							event.getPlayer().sendMessage(ChatColor.GREEN + plugin.updater.getLatestVersionString() + ChatColor.GOLD + " is now available for download!");
+							event.getPlayer().sendMessage(ChatColor.GREEN + plugin.getUpdater().getLatestVersionString() + ChatColor.GOLD + " is now available for download!");
 							event.getPlayer().sendMessage(ChatColor.GOLD + "Type " + ChatColor.GREEN + "'/fo update'" + ChatColor.GOLD + " to update FoundOres.");	
 						}
 						

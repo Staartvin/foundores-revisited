@@ -37,7 +37,7 @@ public class MySQLHandler {
 
 		if (mysql.connect()) {
 			plugin.getLogger().info("MySQL database connected!");
-			plugin.log.logToFile("Connected to database '" + database
+			plugin.getLogClass().logToFile("Connected to database '" + database
 					+ "' on host " + host, eventTypes.MYSQL_CONNECTION);
 		} else {
 			plugin.getLogger().info("Could not connect to MySQL database!");
@@ -98,7 +98,7 @@ public class MySQLHandler {
 		}
 
 		String block = null;
-		DatabaseConnector dCon = plugin.dCon;
+		DatabaseConnector dCon = plugin.getDatabaseConnector();
 		int blockCount = 0;
 
 		if (blockID == 1) {
