@@ -3,7 +3,7 @@ package me.staartvin.foundores;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import me.staartvin.foundores.Database.Database;
+import me.staartvin.foundores.database.Database;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -11,7 +11,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
 
 
 public class Methods {
@@ -251,82 +250,16 @@ public class Methods {
 		}
 	}
 
-	public void checkAnnounceMode(final String playername, int bid,
-			final Player player, Block block) {
-		if (plugin.getConfig().getBoolean("announceMode")) {
-			if (plugin.getConfig().getList("NoticeableBlocks").contains(bid)) {
-				if (player.hasPermission("foundores.exempt.noticeable")) {
-					return;
-				}
-				if (plugin.mineVerify.get(playername) == null) {
-					plugin.mineVerify.put(playername, false);
-				}
-				if (plugin.schedulerRun.get(playername) == null) {
-					plugin.schedulerRun.put(playername, false);
-				}
-				plugin.mineVerify.put(playername, true);
-
-				if (plugin.mineVerify.get(playername)) {
-					if (plugin.oreID.get(playername) == null) {
-						plugin.oreID.put(playername, bid);
-					}
-					if (plugin.oreID.get(playername) == bid) {
-						if (plugin.brokenCount.get(playername) == null) {
-							plugin.brokenCount.put(playername, 0);
-						}
-						plugin.brokenCount.put(playername,
-								plugin.brokenCount.get(playername) + 1);
-					}
-				}
-
-				if (plugin.schedulerRun.get(playername)) {
-					return;
-				}
-				plugin.schedulerRun.put(playername, true);
-				plugin.oreMaterial.put(playername, block.getType());
-				// Turn mineVerify after 5 seconds to false
-				plugin.getServer().getScheduler()
-						.runTaskLater(plugin, new Runnable() {
-							@Override
-							public void run() {
-
-								for (Player players : plugin.getServer()
-										.getOnlinePlayers()) {
-									if (players
-											.hasPermission("foundores.notice")) {
-										players.sendMessage(ChatColor.RED
-												+ player.getName()
-												+ " has mined "
-												+ plugin.brokenCount
-														.get(playername)
-												+ " "
-												+ plugin.oreMaterial.get(
-														playername).name());
-									}
-								}
-
-								plugin.mineVerify.put(playername, false);
-								plugin.schedulerRun.put(playername, false);
-								plugin.oreID.put(playername, null);
-								plugin.brokenCount.put(playername, null);
-
-							}
-						}, 100L);
-			}
-		}
-	}
-
-	public boolean checkLightLevel(BlockBreakEvent event, Player player) {
+	public boolean checkLightLevel(Block block, Player player) {
 		if (!plugin.getConfig().getBoolean("allowLowLightMining")) {
-			if (event.getBlock().getY() <= 60) {
-				if (plugin.getMethodsClass().getLightLevel(event.getBlock()) <= plugin
+			if (block.getY() <= 60) {
+				if (plugin.getMethodsClass().getLightLevel(block) <= plugin
 						.getConfig().getInt("LightLevelDenial")) {
 					if (player.hasPermission("foundores.exempt.lightlevel")) {
 						return true;
 					}
 					player.sendMessage(ChatColor.RED
 							+ "You may not break this block! Light level is too low!");
-					event.setCancelled(true);
 					return false;
 				}
 			}

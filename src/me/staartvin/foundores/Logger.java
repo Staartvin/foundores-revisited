@@ -1,5 +1,10 @@
 package me.staartvin.foundores;
 
+/**
+ * This class outputs text in the console in real time.
+ * @author Staartvin
+ *
+ */
 public class Logger {
 
 	FoundOres plugin;

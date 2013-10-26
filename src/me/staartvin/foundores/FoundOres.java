@@ -5,23 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 
 import me.staartvin.foundores.LogClass.eventTypes;
-import me.staartvin.foundores.API.API;
-import me.staartvin.foundores.Commands.FoundOresCommandExecutor;
-import me.staartvin.foundores.Database.Database;
-import me.staartvin.foundores.Database.DatabaseConnector;
-import me.staartvin.foundores.Files.loadFiles;
-import me.staartvin.foundores.Listeners.BlockBreakListener;
-import me.staartvin.foundores.Listeners.PlayerJoinListener;
-import me.staartvin.foundores.Listeners.PlayerQuitListener;
-import me.staartvin.foundores.MySQL.MySQLHandler;
-import me.staartvin.foundores.Saves.IntervalSaves;
-import me.staartvin.foundores.Saves.SaveHandler;
-import me.staartvin.foundores.Update.AutoUpdateTask;
-import me.staartvin.foundores.Update.Updater;
-import me.staartvin.foundores.Update.Updater.UpdateResult;
+import me.staartvin.foundores.announcer.AnnounceHandler;
+import me.staartvin.foundores.announcer.AnnounceTask;
+import me.staartvin.foundores.api.API;
+import me.staartvin.foundores.commands.FoundOresCommandExecutor;
+import me.staartvin.foundores.database.Database;
+import me.staartvin.foundores.database.DatabaseConnector;
+import me.staartvin.foundores.files.loadFiles;
+import me.staartvin.foundores.listeners.BlockBreakListener;
+import me.staartvin.foundores.listeners.PlayerJoinListener;
+import me.staartvin.foundores.listeners.PlayerQuitListener;
+import me.staartvin.foundores.mysql.MySQLHandler;
+import me.staartvin.foundores.saves.IntervalSaves;
+import me.staartvin.foundores.saves.SaveHandler;
+import me.staartvin.foundores.update.AutoUpdateTask;
+import me.staartvin.foundores.update.Updater;
+import me.staartvin.foundores.update.Updater.UpdateResult;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,17 +39,13 @@ public class FoundOres extends JavaPlugin {
 	private OreRatios oreRatio = new OreRatios();
 	private MySQLHandler mysqlHandler = new MySQLHandler(this);
 	private SaveHandler saveHandler = new SaveHandler(this);
+	private AnnounceHandler announceHandler = new AnnounceHandler(this);
 	
 	public ArrayList<String> loggedActions = new ArrayList<String>();
 	private Updater updater;
 	//private BukkitTask autoUpdateTask;
 
 	public HashMap<String, Boolean> hasReceived = new HashMap<String, Boolean>();
-	public HashMap<String, Boolean> mineVerify = new HashMap<String, Boolean>();
-	public HashMap<String, Boolean> schedulerRun = new HashMap<String, Boolean>();
-	public HashMap<String, Integer> oreID = new HashMap<String, Integer>();
-	public HashMap<String, Integer> brokenCount = new HashMap<String, Integer>();
-	public HashMap<String, Material> oreMaterial = new HashMap<String, Material>();
 
 	long firstTime, lastTime, finalTime;
 
@@ -105,6 +102,9 @@ public class FoundOres extends JavaPlugin {
 			new AutoUpdateTask(this).runTaskTimerAsynchronously(this, 600L, getConfig().getInt("Updater.autoUpdateIntervalTimer") * 1200);
 		}
 
+		// Initiate the announce task
+		new AnnounceTask(this).runTaskTimerAsynchronously(this, 100L, 1200L);
+		
 		logger.logNormal("FoundOres Revisited v"
 				+ getDescription().getVersion() + " has been enabled!");
 		log.logToFile("[INFO] FOUNDORES v" + getDescription().getVersion()
@@ -234,5 +234,9 @@ public class FoundOres extends JavaPlugin {
 	
 	public SaveHandler getSaveHandler() {
 		return saveHandler;
+	}
+	
+	public AnnounceHandler getAnnounceHandler() {
+		return announceHandler;
 	}
 }

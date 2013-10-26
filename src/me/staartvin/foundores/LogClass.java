@@ -8,6 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * This class logs all actions to a file (logfile.yml). These messages will not be shown on the console.
+ * 
+ * @author Staartvin
+ *
+ */
 public class LogClass {
 
 	FoundOres plugin;
