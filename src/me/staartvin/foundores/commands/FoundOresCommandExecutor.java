@@ -3,11 +3,12 @@ package me.staartvin.foundores.commands;
 import java.util.List;
 
 import me.staartvin.foundores.FoundOres;
-import me.staartvin.foundores.LogClass.eventTypes;
+import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.leaderboard.LeaderboardClass;
 import me.staartvin.foundores.report.CreateReportTask;
 
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -90,7 +91,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "Do '/fo materials' to get a list of materials!");
 					return true;
 				}
-				String worldName = plugin.getMethodsClass().matchWorlds(args[2]);
+				String worldName = findWorld(args[2]);
 				if (worldName == null) {
 					sender.sendMessage(ChatColor.RED + "World '" + args[2]
 							+ "' could not be found!");
@@ -444,4 +445,16 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 		plugin.getLogClass().logToFile(sender.getName() + " performed '/fo " + command
 				+ "'", eventTypes.COMMAND);
 	}
+	
+	private String findWorld(String worldGuess) {
+		List<World> worlds = plugin.getServer().getWorlds();
+		
+		for (int i=0;i<worlds.size();i++) {
+			String worldName = worlds.get(i).getName();
+			if (worldName.equalsIgnoreCase(worldGuess)) return worldName;
+			continue;
+		}
+		return null;
+	}
+	
 }

@@ -30,7 +30,8 @@ public class IntervalSaves {
 				plugin.getLoggerClass().logNormal("NOTICE: Interval time is set to "
 						+ saveInterval
 						+ " minutes. Save interval cannot be higher than 600!");
-				plugin.getMethodsClass().disablePlugin();
+				// Disable plugin because a too high value is dangerous.
+				plugin.getServer().getPluginManager().disablePlugin(plugin);
 				return;
 			} else if (saveInterval >= 300) {
 				plugin.getLoggerClass()

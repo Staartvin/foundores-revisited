@@ -10,7 +10,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 
 public class Methods {
@@ -214,67 +213,5 @@ public class Methods {
 				+ Math.round(b8) + ")");
 		sender.sendMessage(ChatColor.WHITE + "Nether Quartz: " + p9p + " ("
 				+ Math.round(b9) + ")");
-	}
-
-	public void disablePlugin() {
-		if (plugin.getServer().getPluginManager().isPluginEnabled(plugin)) {
-			plugin.getServer().getScheduler()
-					.runTaskLater(plugin, new Runnable() {
-
-						public void run() {
-							plugin.getServer().getPluginManager()
-									.disablePlugin(plugin);
-						}
-					}, 5L);
-			return;
-		} else {
-			// Plugin is not loaded.
-			return;
-		}
-	}
-
-	public void noticePlayeronMine(Player player) {
-		if (plugin.getConfig().getBoolean("noticePlayerOnMine")) {
-			if (plugin.hasReceived.get(player.getName()) == null) {
-				plugin.hasReceived.put(player.getName(), false);
-			}
-			if (plugin.hasReceived.get(player.getName())) {
-
-				return;
-			} else if (plugin.hasReceived.get(player.getName()) == false) {
-				plugin.hasReceived.put(player.getName(), true);
-			}
-
-			player.sendMessage(plugin.getConfig().getString(
-					"noticeMessageToPlayer"));
-		}
-	}
-
-	public boolean checkLightLevel(Block block, Player player) {
-		if (!plugin.getConfig().getBoolean("allowLowLightMining")) {
-			if (block.getY() <= 60) {
-				if (plugin.getMethodsClass().getLightLevel(block) <= plugin
-						.getConfig().getInt("LightLevelDenial")) {
-					if (player.hasPermission("foundores.exempt.lightlevel")) {
-						return true;
-					}
-					player.sendMessage(ChatColor.RED
-							+ "You may not break this block! Light level is too low!");
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-	
-	public String matchWorlds(String worldGuess) {
-		List<World> worlds = plugin.getServer().getWorlds();
-		
-		for (int i=0;i<worlds.size();i++) {
-			String worldName = worlds.get(i).getName();
-			if (worldName.equalsIgnoreCase(worldGuess)) return worldName;
-			continue;
-		}
-		return null;
 	}
 }

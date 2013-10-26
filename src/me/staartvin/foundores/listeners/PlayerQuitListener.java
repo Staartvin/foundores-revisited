@@ -17,16 +17,9 @@ public class PlayerQuitListener implements Listener {
 	@EventHandler
 	protected void onPlayerQuit(PlayerQuitEvent event) {
 		if (plugin.getConfig().getBoolean("noticePlayerOnMine")) {
-			if (!plugin.hasReceived.containsKey(event.getPlayer().getName())) {
-				plugin.hasReceived.put(event.getPlayer().getName(), false);
-				return;
-			}
-			if (plugin.hasReceived.get(event.getPlayer().getName())) {
-				plugin.hasReceived.put(event.getPlayer().getName(), false);
-				return;
-			} else if (plugin.hasReceived.get(event.getPlayer().getName()) == false) {
-				return;
-			}
+			
+			// Player logs out so we reset the status
+			plugin.hasReceived(false);
 		}
 	}
 }
