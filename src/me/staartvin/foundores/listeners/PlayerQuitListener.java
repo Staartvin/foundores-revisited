@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Listeners;
+package me.staartvin.foundores.listeners;
 
 import me.staartvin.foundores.FoundOres;
 

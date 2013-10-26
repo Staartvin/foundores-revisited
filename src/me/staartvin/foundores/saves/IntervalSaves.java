@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Saves;
+package me.staartvin.foundores.saves;
 
 import me.staartvin.foundores.FoundOres;
 
@@ -12,6 +12,7 @@ public class IntervalSaves {
 	int saveInterval;
 	public boolean saveProgress = false;
 	int count = 0;
+	private boolean firstSaveDone = false;
 
 	public IntervalSaves(FoundOres plugin) {
 		this.plugin = plugin;
@@ -48,22 +49,20 @@ public class IntervalSaves {
 
 			@Override
 			public void run() {
-				save(null, true, false, null);
+				save(null, false, null);
 			}
 		}, 0L, saveInterval);
 	}
 
 	// Save ALL THE DATA!!!
-	public void save(String playerName, boolean firstSave, boolean forceSave,
+	public void save(String playerName, boolean forceSave,
 			Player player) {
-		//plugin.reloadConfig();
-		//plugin.loadFiles.reloadDataConfig();
 
 		if (saveProgress)
 			return;
 
 		// Schedule a save.
-		new SaveTask(plugin, this, playerName, firstSave, forceSave, player)
+		new SaveTask(plugin, this, playerName, forceSave, player)
 				.runTaskAsynchronously(plugin);
 
 	}
@@ -71,18 +70,24 @@ public class IntervalSaves {
 	protected void saveComplete(Player player) {
 		if (player != null && player.isOnline()) {
 			player.sendMessage(ChatColor.GREEN + "All work saved!");
-			plugin.getLoggerClass().logVerbose("Save is complete.");
-		} else {
-			plugin.getLoggerClass().logVerbose("Save is complete.");
-		}
+		} 
+		plugin.getLoggerClass().logVerbose("Save is complete.");
 	}
 
 	protected void letsWork(final String playername, final Player player) {
 		plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
 			public void run() {
 
-				save(playername, false, false, player);
+				save(playername, false, player);
 			}
 		}, (plugin.getConfig().getInt("sleepTime") * 20));
+	}
+
+	public boolean isFirstSaveDone() {
+		return firstSaveDone;
+	}
+
+	public void setFirstSaveDone(boolean firstSaveDone) {
+		this.firstSaveDone = firstSaveDone;
 	}
 }

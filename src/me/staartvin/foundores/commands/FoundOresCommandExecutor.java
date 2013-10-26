@@ -1,11 +1,11 @@
-package me.staartvin.foundores.Commands;
+package me.staartvin.foundores.commands;
 
 import java.util.List;
 
 import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.LogClass.eventTypes;
-import me.staartvin.foundores.Leaderboard.LeaderboardClass;
-import me.staartvin.foundores.Report.CreateReportTask;
+import me.staartvin.foundores.leaderboard.LeaderboardClass;
+import me.staartvin.foundores.report.CreateReportTask;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -256,7 +256,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 					return true;
 				}
 				sender.sendMessage(ChatColor.GREEN + "Starting save...");
-				plugin.getInternalSaves().save(sender.getName(), true, false, plugin
+				plugin.getInternalSaves().save(sender.getName(), false, plugin
 						.getServer().getPlayer(sender.getName()));
 				return true;
 			} else if (args[0].equalsIgnoreCase("reload")) {
@@ -265,9 +265,6 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				}
 				plugin.reloadConfig();
 				plugin.saveConfig();
-
-				//plugin.getServer().getPluginManager().disablePlugin(plugin);
-				//plugin.getServer().getPluginManager().enablePlugin(plugin);
 
 				sender.sendMessage(ChatColor.GREEN
 						+ "You successfully reloaded FO:RE.");

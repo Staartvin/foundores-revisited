@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Report;
+package me.staartvin.foundores.report;
 
 import me.staartvin.foundores.FoundOres;
 

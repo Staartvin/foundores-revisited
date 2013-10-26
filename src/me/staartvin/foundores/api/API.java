@@ -1,4 +1,4 @@
-package me.staartvin.foundores.API;
+package me.staartvin.foundores.api;
 
 import me.staartvin.foundores.FoundOres;
 

@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Saves;
+package me.staartvin.foundores.saves;
 
 import java.util.ArrayList;
 
@@ -13,16 +13,14 @@ public class SaveTask extends BukkitRunnable {
 	private final FoundOres plugin;
 	private final IntervalSaves saves;
 	private String playerName = "";
-	private boolean firstSave = false;
 	private boolean forceSave = false;
 	private Player player;
 
 	public SaveTask(FoundOres plugin, IntervalSaves saves, String playerName,
-			boolean firstSave, boolean forceSave, Player player) {
+			boolean forceSave, Player player) {
 		this.plugin = plugin;
 		this.saves = saves;
 		this.playerName = playerName;
-		this.firstSave = firstSave;
 		this.forceSave = forceSave;
 		this.player = player;
 	}
@@ -38,7 +36,8 @@ public class SaveTask extends BukkitRunnable {
 		ArrayList<String> stbr = new ArrayList<String>(); // Soon to be removed strings
 
 		// Just a message setup
-		if (firstSave) {
+		if (!plugin.getInternalSaves().isFirstSaveDone()) {
+			plugin.getInternalSaves().setFirstSaveDone(true);
 			if (playerName == null) {
 				plugin.getLoggerClass().logVerbose("Saving all data...");
 			} else {

@@ -1,11 +1,11 @@
-package me.staartvin.foundores.Leaderboard;
+package me.staartvin.foundores.leaderboard;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import me.staartvin.foundores.FoundOres;
-import me.staartvin.foundores.Database.Database;
+import me.staartvin.foundores.database.Database;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

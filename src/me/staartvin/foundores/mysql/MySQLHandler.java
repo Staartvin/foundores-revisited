@@ -1,8 +1,8 @@
-package me.staartvin.foundores.MySQL;
+package me.staartvin.foundores.mysql;
 
 import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.LogClass.eventTypes;
-import me.staartvin.foundores.Database.DatabaseConnector;
+import me.staartvin.foundores.database.DatabaseConnector;
 
 /**
  * @author Staartvin

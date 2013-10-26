@@ -1,4 +1,4 @@
-package me.staartvin.foundores.MySQL;
+package me.staartvin.foundores.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

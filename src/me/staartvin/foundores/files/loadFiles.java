@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Files;
+package me.staartvin.foundores.files;
 
 import java.util.Arrays;
 import java.util.List;

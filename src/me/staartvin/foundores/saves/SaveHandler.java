@@ -1,10 +1,15 @@
-package me.staartvin.foundores.Saves;
+package me.staartvin.foundores.saves;
 
 import java.util.ArrayList;
 
 import me.staartvin.foundores.FoundOres;
 
 
+/**
+ * This class handles whether we should save to MYSQL if it's enabled. We always save local.
+ * @author Staartvin
+ *
+ */
 public class SaveHandler {
 
 	private FoundOres plugin;

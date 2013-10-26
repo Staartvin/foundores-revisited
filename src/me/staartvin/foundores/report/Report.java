@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Report;
+package me.staartvin.foundores.report;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.logging.Level;
 
 import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.LogClass.eventTypes;
-import me.staartvin.foundores.Database.Database;
+import me.staartvin.foundores.database.Database;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

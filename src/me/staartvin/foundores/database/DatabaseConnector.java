@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Database;
+package me.staartvin.foundores.database;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@
  * This class provides the means to safetly and easily update a plugin, or check to see if it is updated using dev.bukkit.org
  */
 
-package me.staartvin.foundores.Update;
+package me.staartvin.foundores.update;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

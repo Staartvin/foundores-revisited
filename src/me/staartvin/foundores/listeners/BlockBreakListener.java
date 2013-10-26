@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Listeners;
+package me.staartvin.foundores.listeners;
 
 import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.LogClass.eventTypes;
@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-
 
 public class BlockBreakListener implements Listener {
 
@@ -38,17 +37,23 @@ public class BlockBreakListener implements Listener {
 		if (bid == 74) {
 			bid = 73;
 		}
+
 		if (bid == 1 || bid == 14 || bid == 15 || bid == 16 || bid == 21
 				|| bid == 56 || bid == 73 || bid == 129 || bid == 153) {
 
-			if (!plugin.getMethodsClass().checkLightLevel(event, player))
+			if (!plugin.getMethodsClass().checkLightLevel(event.getBlock(),
+					player)) {
+				event.setCancelled(true);
 				return;
+			}
 
 			// Log block
-			plugin.getLogClass().logToFile("[INFO] PLAYER " + player.getName()
-					+ " has broken " + event.getBlock().getType() + " at "
-					+ event.getBlock().getX() + ", " + event.getBlock().getY()
-					+ ", " + event.getBlock().getZ(), eventTypes.BLOCKBREAK);
+			plugin.getLogClass().logToFile(
+					"[INFO] PLAYER " + player.getName() + " has broken "
+							+ event.getBlock().getType() + " at "
+							+ event.getBlock().getX() + ", "
+							+ event.getBlock().getY() + ", "
+							+ event.getBlock().getZ(), eventTypes.BLOCKBREAK);
 
 			// Add a new block break action to the queue.
 			plugin.loggedActions.add(playername + ":"
@@ -57,9 +62,10 @@ public class BlockBreakListener implements Listener {
 			// Notice player of mining
 			plugin.getMethodsClass().noticePlayeronMine(event.getPlayer());
 
-			plugin.getMethodsClass().checkAnnounceMode(playername, bid, player,
-					event.getBlock());
-
+			// Check if we have to record it for announcing later
+			if (plugin.getAnnounceHandler().shouldRecord(player, bid)) {
+				plugin.getAnnounceHandler().registerBlockBreak(player.getName(), bid);
+			}
 		}
 	}
 }

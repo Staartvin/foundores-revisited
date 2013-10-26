@@ -1,4 +1,4 @@
-package me.staartvin.foundores.Update;
+package me.staartvin.foundores.update;
 
 import me.staartvin.foundores.FoundOres;
 
