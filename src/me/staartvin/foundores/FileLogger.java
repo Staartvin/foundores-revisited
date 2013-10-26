@@ -14,11 +14,11 @@ import java.util.Date;
  * @author Staartvin
  *
  */
-public class LogClass {
+public class FileLogger {
 
 	FoundOres plugin;
 	
-	protected LogClass(FoundOres plugin) {
+	protected FileLogger(FoundOres plugin) {
 		this.plugin = plugin;
 	}
 	Calendar calendar = Calendar.getInstance();
