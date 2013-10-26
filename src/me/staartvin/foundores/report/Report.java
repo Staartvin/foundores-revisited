@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import me.staartvin.foundores.FoundOres;
-import me.staartvin.foundores.LogClass.eventTypes;
+import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.database.Database;
 
 import org.bukkit.configuration.file.FileConfiguration;

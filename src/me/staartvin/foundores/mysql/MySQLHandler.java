@@ -1,7 +1,7 @@
 package me.staartvin.foundores.mysql;
 
 import me.staartvin.foundores.FoundOres;
-import me.staartvin.foundores.LogClass.eventTypes;
+import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.database.DatabaseConnector;
 
 /**

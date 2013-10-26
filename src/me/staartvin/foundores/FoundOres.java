@@ -1,10 +1,9 @@
 package me.staartvin.foundores;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import me.staartvin.foundores.LogClass.eventTypes;
+import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.announcer.AnnounceHandler;
 import me.staartvin.foundores.announcer.AnnounceTask;
 import me.staartvin.foundores.api.API;
@@ -35,17 +34,16 @@ public class FoundOres extends JavaPlugin {
 	private Methods methods = new Methods(this);
 	private API api = new API(this);
 	private DatabaseConnector dCon = new DatabaseConnector(this);
-	private LogClass log = new LogClass(this);
+	private FileLogger fileLog = new FileLogger(this);
 	private OreRatios oreRatio = new OreRatios();
 	private MySQLHandler mysqlHandler = new MySQLHandler(this);
 	private SaveHandler saveHandler = new SaveHandler(this);
 	private AnnounceHandler announceHandler = new AnnounceHandler(this);
+	private BlockBreakListener blockBreakListener;
 	
 	public ArrayList<String> loggedActions = new ArrayList<String>();
 	private Updater updater;
 	//private BukkitTask autoUpdateTask;
-
-	public HashMap<String, Boolean> hasReceived = new HashMap<String, Boolean>();
 
 	long firstTime, lastTime, finalTime;
 
@@ -61,7 +59,7 @@ public class FoundOres extends JavaPlugin {
 		
 		logger.logNormal("FoundOres Revisted v" + getDescription().getVersion()
 				+ " has been disabled!");
-		log.logToFile("[INFO] FOUNDORES v" + getDescription().getVersion()
+		fileLog.logToFile("[INFO] FOUNDORES v" + getDescription().getVersion()
 				+ " has been disabled", eventTypes.DISABLE);
 	}
 
@@ -107,7 +105,7 @@ public class FoundOres extends JavaPlugin {
 		
 		logger.logNormal("FoundOres Revisited v"
 				+ getDescription().getVersion() + " has been enabled!");
-		log.logToFile("[INFO] FOUNDORES v" + getDescription().getVersion()
+		fileLog.logToFile("[INFO] FOUNDORES v" + getDescription().getVersion()
 				+ " has been enabled", eventTypes.ENABLE);
 	}
 
@@ -138,8 +136,9 @@ public class FoundOres extends JavaPlugin {
 	}
 
 	private void registerListeners() {
+		blockBreakListener = new BlockBreakListener(this);
 		getServer().getPluginManager().registerEvents(
-				new BlockBreakListener(this), this);
+				blockBreakListener, this);
 		getServer().getPluginManager().registerEvents(
 				new PlayerJoinListener(this), this);
 		getServer().getPluginManager().registerEvents(
@@ -220,8 +219,8 @@ public class FoundOres extends JavaPlugin {
 		return mysqlHandler;
 	}
 	
-	public LogClass getLogClass() {
-		return log;
+	public FileLogger getLogClass() {
+		return fileLog;
 	}
 	
 	public IntervalSaves getInternalSaves() {
@@ -238,5 +237,9 @@ public class FoundOres extends JavaPlugin {
 	
 	public AnnounceHandler getAnnounceHandler() {
 		return announceHandler;
+	}
+	
+	public void hasReceived(boolean status) {
+		
 	}
 }
