@@ -1,12 +1,12 @@
 package me.staartvin.foundores.saves;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import me.staartvin.foundores.FoundOres;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
 
 public class SaveTask extends BukkitRunnable {
 
@@ -41,7 +41,8 @@ public class SaveTask extends BukkitRunnable {
 			if (playerName == null) {
 				plugin.getLoggerClass().logVerbose("Saving all data...");
 			} else {
-				plugin.getLoggerClass().logVerbose(playerName + " has forced a save!");
+				plugin.getLoggerClass().logVerbose(
+						playerName + " has forced a save!");
 			}
 		}
 
@@ -51,9 +52,10 @@ public class SaveTask extends BukkitRunnable {
 			saves.saveProgress = false;
 			return;
 		}
+
 		saves.saveProgress = true;
 		plugin.getLoggerClass().debug("Saving " + log.size() + " items.");
-		
+
 		// Force save routine (On shutdown)
 		if (forceSave) {
 			plugin.getLoggerClass().debug("Save is forced! (Shutdown)");
@@ -64,11 +66,10 @@ public class SaveTask extends BukkitRunnable {
 				String[] temp;
 				temp = line.split(":");
 
-				// Temp = playerName:World:BlockID
-				plugin.getSaveHandler().save(temp[0], temp[1],
+				// Temp = UUID:World:BlockID
+				plugin.getSaveHandler().save(UUID.fromString(temp[0]), temp[1],
 						Integer.parseInt(temp[2]));
-				//plugin.loadFiles.getDataConfig().set(temp[1] + "." + temp[0] + "." + temp[2], Integer.valueOf(plugin.loadFiles.getDataConfig().getInt(temp[1] + "." + temp[0] + "." + temp[2]) + 1));
-				//plugin.loadFiles.saveDataConfig();
+
 			}
 			log.clear();
 			saves.saveComplete(player);
@@ -82,11 +83,9 @@ public class SaveTask extends BukkitRunnable {
 				String line = log.get(i);
 				String[] temp;
 				temp = line.split(":");
-				// Temp = playerName:World:BlockID
-				plugin.getSaveHandler().save(temp[0], temp[1],
+				// Temp = UUID:World:BlockID
+				plugin.getSaveHandler().save(UUID.fromString(temp[0]), temp[1],
 						Integer.parseInt(temp[2]));
-				//plugin.loadFiles.getDataConfig().set(temp[1] + "." + temp[0] + "." + temp[2], Integer.valueOf(plugin.loadFiles.getDataConfig().getInt(temp[1] + "." + temp[0] + "." + temp[2]) + 1));
-				//plugin.loadFiles.saveDataConfig();
 			}
 			plugin.getLoggerClass().debug("Quick saving to the end..");
 			log.clear();
@@ -100,15 +99,16 @@ public class SaveTask extends BukkitRunnable {
 
 			// We have done enough work for this time! Let's take a short break.
 			if (workCounter > Math.ceil(log.size() / 4)) {
-				plugin.getLoggerClass().debug("Saved " + stbr.size()
-						+ " items this round!");
+				plugin.getLoggerClass().debug(
+						"Saved " + stbr.size() + " items this round!");
 
 				for (int j = 0; j < stbr.size(); j++) {
 					plugin.loggedActions.remove(stbr.get(j));
 				}
 				saves.letsWork(playerName, player);
-				plugin.getLoggerClass().debug("Total size of logged actions: "
-						+ plugin.loggedActions.size());
+				plugin.getLoggerClass().debug(
+						"Total size of logged actions: "
+								+ plugin.loggedActions.size());
 				return;
 			}
 			// Work to do!
@@ -120,11 +120,9 @@ public class SaveTask extends BukkitRunnable {
 			// We have done more work! We're getting lazier...
 			workCounter++;
 
-			// Temp = playerName:World:BlockID
-			plugin.getSaveHandler().save(temp[0], temp[1],
+			// Temp = UUID:World:BlockID
+			plugin.getSaveHandler().save(UUID.fromString(temp[0]), temp[1],
 					Integer.parseInt(temp[2]));
-			//plugin.loadFiles.getDataConfig().set(temp[1] + "." + temp[0] + "." + temp[2], Integer.valueOf(plugin.loadFiles.getDataConfig().getInt(temp[1] + "." + temp[0] + "." + temp[2]) + 1));
-			//plugin.loadFiles.saveDataConfig();
 		}
 	}
 }

@@ -1,8 +1,10 @@
 package me.staartvin.foundores.mysql;
 
-import me.staartvin.foundores.FoundOres;
+import java.util.UUID;
+
 import me.staartvin.foundores.FileLogger.eventTypes;
-import me.staartvin.foundores.database.DatabaseConnector;
+import me.staartvin.foundores.FoundOres;
+import me.staartvin.foundores.database.DatabaseConnector.blockTypes;
 
 /**
  * @author Staartvin
@@ -53,17 +55,17 @@ public class MySQLHandler {
 
 		String statement = "CREATE TABLE IF NOT EXISTS " + table + " "
 				+ "(id INT PRIMARY KEY AUTO_INCREMENT,"
-				+ " playerName VARCHAR(32) not NULL UNIQUE,"
+				+ " uuid VARCHAR(255) not NULL UNIQUE,"
 				+ " world VARCHAR(100) not NULL UNIQUE,"
 				+ " stone BIGINT not NULL default '0',"
 				+ " coal BIGINT not NULL default '0',"
 				+ " iron BIGINT not NULL default '0',"
 				+ " gold BIGINT not NULL default '0',"
 				+ " redstone BIGINT not NULL default '0',"
-				+ " lapis BIGINT not NULL default '0',"
+				+ " lapis_lazuli BIGINT not NULL default '0',"
 				+ " diamond BIGINT not NULL default '0',"
 				+ " emerald BIGINT not NULL default '0',"
-				+ " netherquartz BIGINT not NULL default '0');";
+				+ " nether_quartz BIGINT not NULL default '0');";
 		mysql.execute(statement);
 	}
 
@@ -84,59 +86,50 @@ public class MySQLHandler {
 
 		// Update netherquartz
 		statement = " ALTER TABLE " + table
-				+ " ADD netherquartz BIGINT NOT NULL default '0';";
+				+ " ADD nether_quartz BIGINT NOT NULL default '0';";
 		mysql.execute(statement);
 		plugin.getLogger().info("Database check for netherquartz");
 
 		plugin.getLogger().info("Database is up-to-date!");
 	}
 
-	public void incrementBlockCount(String world, String player, int blockID) {
+	public void incrementBlockCount(String world, UUID uuid, int blockID) {
 		// If the MySQL Connection is somehow closed, open it again.
 		if (mysql.isClosed()) {
 			mysql.connect();
 		}
 
-		String block = null;
-		DatabaseConnector dCon = plugin.getDatabaseConnector();
-		int blockCount = 0;
+		blockTypes type = null;
 
 		if (blockID == 1) {
-			block = "stone";
-			blockCount = dCon.getBrokenStone(player, world);
+			type = blockTypes.STONE;
 		} else if (blockID == 14) {
-			block = "gold";
-			blockCount = dCon.getBrokenGold(player, world);
+			type = blockTypes.GOLD;
 		} else if (blockID == 15) {
-			block = "iron";
-			blockCount = dCon.getBrokenIron(player, world);
+			type = blockTypes.IRON;
 		} else if (blockID == 16) {
-			block = "coal";
-			blockCount = dCon.getBrokenCoal(player, world);
+			type = blockTypes.COAL;
 		} else if (blockID == 21) {
-			block = "lapis";
-			blockCount = dCon.getBrokenLapisLazuli(player, world);
+			type = blockTypes.LAPIS_LAZULI;
 		} else if (blockID == 56) {
-			block = "diamond";
-			blockCount = dCon.getBrokenDiamond(player, world);
+			type = blockTypes.DIAMOND;
 		} else if (blockID == 73) {
-			block = "redstone";
-			blockCount = dCon.getBrokenRedstone(player, world);
+			type = blockTypes.REDSTONE;
 		} else if (blockID == 129) {
-			block = "emerald";
-			blockCount = dCon.getBrokenEmerald(player, world);
+			type = blockTypes.EMERALD;
 		} else if (blockID == 153) {
-			block = "netherquartz";
-			blockCount = dCon.getBrokenNetherQuartz(player, world);
+			type = blockTypes.NETHER_QUARTZ;
 		} else {
-			block = "stone";
-			blockCount = dCon.getBrokenStone(player, world);
+			type = blockTypes.STONE;
 		}
-
+		
+		String blockName = type.toString().toLowerCase(); 
+		int blockCount = plugin.getDatabaseConnector().getBrokenBlockCount(uuid, world, type);
+		
 		String statement = "" + "INSERT INTO " + table
-				+ " (playerName, world, " + block + ")" + " VALUES ('" + player
+				+ " (uuid, world, " + blockName + ")" + " VALUES ('" + uuid.toString()
 				+ "', '" + world + "', " + blockCount + ")"
-				+ " ON DUPLICATE KEY UPDATE " + block + "=" + blockCount;
+				+ " ON DUPLICATE KEY UPDATE " + blockName + "=" + blockCount;
 		mysql.execute(statement);
 	}
 }

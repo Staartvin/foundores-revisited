@@ -7,15 +7,16 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 
-import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.FileLogger.eventTypes;
+import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.database.Database;
+import me.staartvin.foundores.database.DatabaseConnector.blockTypes;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-
 
 public class Report {
 
@@ -84,8 +85,10 @@ public class Report {
 	}
 
 	protected void fillReport() {
-		plugin.getLoggerClass().logNormal("Creating a report. This can take a while...");
-		plugin.getLogClass().logToFile("Creating a report", eventTypes.REPORT_CREATION);
+		plugin.getLoggerClass().logNormal(
+				"Creating a report. This can take a while...");
+		plugin.getLogClass().logToFile("Creating a report",
+				eventTypes.REPORT_CREATION);
 		List<Database> database = plugin.getDatabase().find(Database.class)
 				.findList();
 
@@ -94,22 +97,23 @@ public class Report {
 			return;
 		}
 
-		String playerName;
+		UUID uuid;
 
 		for (int i = 0; i < database.size(); i++) {
-			playerName = database.get(i).getPlayerName();
+			uuid = database.get(i).getRealUUID();
 
-			String world = database.get(i).getWorld();
+			String playerName = plugin.getUUIDManager().getPlayerFromUUID(uuid);
 
-			double b1 = plugin.getDatabaseConnector().getBrokenStone(playerName, world);
-			double b2 = plugin.getDatabaseConnector().getBrokenCoal(playerName, world);
-			double b3 = plugin.getDatabaseConnector().getBrokenIron(playerName, world);
-			double b4 = plugin.getDatabaseConnector().getBrokenRedstone(playerName, world);
-			double b5 = plugin.getDatabaseConnector().getBrokenGold(playerName, world);
-			double b6 = plugin.getDatabaseConnector().getBrokenLapisLazuli(playerName, world);
-			double b7 = plugin.getDatabaseConnector().getBrokenDiamond(playerName, world);
-			double b8 = plugin.getDatabaseConnector().getBrokenEmerald(playerName, world);
-			double b9 = plugin.getDatabaseConnector().getBrokenNetherQuartz(playerName, world);
+			double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+			double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+			double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+			double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+			double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+			double b6 = database.get(i).getBrokenCount(blockTypes.LAPIS_LAZULI);
+			double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+			double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+			double b9 = database.get(i)
+					.getBrokenCount(blockTypes.NETHER_QUARTZ);
 			double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 			double p2 = b2 / ba;
@@ -120,7 +124,7 @@ public class Report {
 			double p7 = b7 / ba;
 			double p8 = b8 / ba;
 			double p9 = b9 / ba;
-			
+
 			if (p2 * 100.0D > plugin.getOreRatioStorage().getCoalHigh()) {
 
 				List<String> players = reportConfig.getStringList("PlayersRed");
@@ -171,7 +175,8 @@ public class Report {
 				players.add(playerName.toLowerCase());
 				reportConfig.set("PlayersRed", players);
 				saveReportConfig();
-			} else if (p4 * 100.0D > plugin.getOreRatioStorage().getRedstoneLow()) {
+			} else if (p4 * 100.0D > plugin.getOreRatioStorage()
+					.getRedstoneLow()) {
 
 				List<String> players = reportConfig
 						.getStringList("PlayersOrange");
@@ -231,7 +236,8 @@ public class Report {
 				players.add(playerName.toLowerCase());
 				reportConfig.set("PlayersRed", players);
 				saveReportConfig();
-			} else if (p7 * 100.0D > plugin.getOreRatioStorage().getDiamondLow()) {
+			} else if (p7 * 100.0D > plugin.getOreRatioStorage()
+					.getDiamondLow()) {
 
 				List<String> players = reportConfig
 						.getStringList("PlayersOrange");
@@ -251,7 +257,8 @@ public class Report {
 				players.add(playerName.toLowerCase());
 				reportConfig.set("PlayersRed", players);
 				saveReportConfig();
-			} else if (p8 * 100.0D > plugin.getOreRatioStorage().getEmeraldLow()) {
+			} else if (p8 * 100.0D > plugin.getOreRatioStorage()
+					.getEmeraldLow()) {
 
 				List<String> players = reportConfig
 						.getStringList("PlayersOrange");
@@ -271,7 +278,8 @@ public class Report {
 				players.add(playerName.toLowerCase());
 				reportConfig.set("PlayersRed", players);
 				saveReportConfig();
-			} else if (p9 * 100.0D > plugin.getOreRatioStorage().getNetherquartzLow()) {
+			} else if (p9 * 100.0D > plugin.getOreRatioStorage()
+					.getNetherquartzLow()) {
 
 				List<String> players = reportConfig
 						.getStringList("PlayersOrange");
@@ -283,7 +291,9 @@ public class Report {
 				saveReportConfig();
 			}
 		}
+
 		plugin.getLoggerClass().debug("Report has been created!");
-		plugin.getLogClass().logToFile("Report has been created", eventTypes.REPORT_CREATION);
+		plugin.getLogClass().logToFile("Report has been created",
+				eventTypes.REPORT_CREATION);
 	}
 }

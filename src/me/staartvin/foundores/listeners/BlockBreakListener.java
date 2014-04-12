@@ -35,7 +35,6 @@ public class BlockBreakListener implements Listener {
 
 		@SuppressWarnings("deprecation")
 		int bid = event.getBlock().getTypeId();
-		String playername = event.getPlayer().getName();
 		Player player = event.getPlayer();
 
 		// Is this a disabled world?
@@ -71,7 +70,8 @@ public class BlockBreakListener implements Listener {
 						+ event.getBlock().getZ(), eventTypes.BLOCKBREAK);
 
 		// Add a new block break action to the queue.
-		plugin.loggedActions.add(playername + ":" + player.getWorld().getName()
+		// Use UUID
+		plugin.loggedActions.add(player.getUniqueId().toString() + ":" + player.getWorld().getName()
 				+ ":" + bid);
 
 		// Notice player of mining

@@ -3,21 +3,23 @@ package me.staartvin.foundores.leaderboard;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.database.Database;
+import me.staartvin.foundores.database.DatabaseConnector.blockTypes;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-
 public class LeaderboardClass {
 
 	FoundOres plugin;
-	
+
 	public LeaderboardClass(FoundOres plugin) {
 		this.plugin = plugin;
 	}
+
 	// Lol you shouldn't see this yet. Oh well.
 	public List<String> createLeaderboard(String block, String world) {
 		List<Database> database = plugin.getDatabase().find(Database.class)
@@ -33,173 +35,182 @@ public class LeaderboardClass {
 
 		if (block.equalsIgnoreCase("stone")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p1 = (b1 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p1) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p1) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("coal")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p2 = (b2 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p2) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p2) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("iron")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p3 = (b3 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p3) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p3) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("gold")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p5 = (b5 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p5) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p5) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("redstone")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p4 = (b4 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p4) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p4) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("lapislazuli")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p6 = (b6 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p6) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p6) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("diamond")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p7 = (b7 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p7) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p7) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("emerald")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p8 = (b8 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p8) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p8) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		} else if (block.equalsIgnoreCase("netherquartz")) {
 			for (int i = 0; i < database.size(); i++) {
-				double b1 = database.get(i).getBrokenStone();
-				double b2 = database.get(i).getBrokenCoal();
-				double b3 = database.get(i).getBrokenIron();
-				double b4 = database.get(i).getBrokenRedstone();
-				double b5 = database.get(i).getBrokenGold();
-				double b6 = database.get(i).getBrokenLapisLazuli();
-				double b7 = database.get(i).getBrokenDiamond();
-				double b8 = database.get(i).getBrokenEmerald();
-				double b9 = database.get(i).getBrokenNetherQuartz();
+				double b1 = database.get(i).getBrokenCount(blockTypes.STONE);
+				double b2 = database.get(i).getBrokenCount(blockTypes.COAL);
+				double b3 = database.get(i).getBrokenCount(blockTypes.IRON);
+				double b4 = database.get(i).getBrokenCount(blockTypes.REDSTONE);
+				double b5 = database.get(i).getBrokenCount(blockTypes.GOLD);
+				double b6 = database.get(i).getBrokenCount(
+						blockTypes.LAPIS_LAZULI);
+				double b7 = database.get(i).getBrokenCount(blockTypes.DIAMOND);
+				double b8 = database.get(i).getBrokenCount(blockTypes.EMERALD);
+				double b9 = database.get(i).getBrokenCount(
+						blockTypes.NETHER_QUARTZ);
 				double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 				double p9 = (b9 / ba) * 100D;
 				String tempString = "";
-				tempString = Math.round(p9) + ":"
-						+ database.get(i).getPlayerName();
+				tempString = Math.round(p9) + ":" + database.get(i).getUUID();
 				unsortedArray.add(tempString);
 			}
 		}
@@ -212,7 +223,8 @@ public class LeaderboardClass {
 		List<String> Stringnumbers = new ArrayList<String>();
 		String[] tempArray = {};
 
-		if (unsortedList == null) return null;
+		if (unsortedList == null)
+			return null;
 		for (String entry : unsortedList) {
 			tempArray = entry.split(":");
 
@@ -312,16 +324,26 @@ public class LeaderboardClass {
 		}
 		return correctNumbersInString;
 	}
-	
-	public void showLeaderboard(List<String> leaderboard, CommandSender sender, String world, String block) {
-		sender.sendMessage(ChatColor.BLUE + "---- [" + ChatColor.GOLD + "Leaderboard for " + block + " on "
-				+ world + ChatColor.BLUE + "] ----");
+
+	public void showLeaderboard(List<String> leaderboard, CommandSender sender,
+			String world, String block) {
+		sender.sendMessage(ChatColor.BLUE + "---- [" + ChatColor.GOLD
+				+ "Leaderboard for " + block + " on " + world + ChatColor.BLUE
+				+ "] ----");
 		Integer rank = 1;
-		for (int i=leaderboard.size() - 1;i>=0;i--) {
-			if (rank == 11) return;
+		for (int i = leaderboard.size() - 1; i >= 0; i--) {
+			if (rank == 11)
+				return;
+			
 			String entry = leaderboard.get(i);
 			String[] tempArray = entry.split(":");
-			sender.sendMessage(ChatColor.GOLD + (rank + "") + ChatColor.BLUE + " -- " + ChatColor.GRAY + tempArray[1] + ChatColor.BLUE + " -- " + ChatColor.GRAY + Integer.parseInt(tempArray[0]) + "%");
+			
+			String playerName = plugin.getUUIDManager().getPlayerFromUUID(UUID.fromString(tempArray[1]));
+			
+			sender.sendMessage(ChatColor.GOLD + (rank + "") + ChatColor.BLUE
+					+ " -- " + ChatColor.GRAY + playerName + ChatColor.BLUE
+					+ " -- " + ChatColor.GRAY + Integer.parseInt(tempArray[0])
+					+ "%");
 			rank++;
 		}
 	}

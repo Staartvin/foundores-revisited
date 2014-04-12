@@ -1,6 +1,7 @@
 package me.staartvin.foundores.saves;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import me.staartvin.foundores.FoundOres;
 
@@ -18,12 +19,12 @@ public class SaveHandler {
 		plugin = instance;
 	}
 
-	public void save(String player, String world, int blockID) {
+	public void save(UUID uuid, String world, int blockID) {
 		// Update local database
-		plugin.getDatabaseConnector().incrementBlockCount(player, world, blockID);
+		plugin.getDatabaseConnector().incrementBlockCount(uuid, world, blockID);
 		
 		if (plugin.getConfig().getBoolean("MySQL.use")) {
-			plugin.getMySQLHandler().incrementBlockCount(world, player, blockID);
+			plugin.getMySQLHandler().incrementBlockCount(world, uuid, blockID);
 		}
 	}
 	
@@ -37,8 +38,8 @@ public class SaveHandler {
 			String[] temp;
 			temp = line.split(":");
 
-			// Temp = playerName:World:BlockID
-			plugin.getDatabaseConnector().incrementBlockCount(temp[0], temp[1],
+			// Temp = UUID:World:BlockID
+			plugin.getDatabaseConnector().incrementBlockCount(UUID.fromString(temp[0]), temp[1],
 					Integer.parseInt(temp[2]));
 			
 			// Don't use save() because MySQL takes too long for a shutdown

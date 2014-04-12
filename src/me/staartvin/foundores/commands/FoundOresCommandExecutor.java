@@ -26,8 +26,8 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 	private String[] materials = { "stone", "coal", "iron", "gold", "redstone",
 			"lapislazuli", "diamond", "emerald", "netherquartz" };
 
-	public boolean onCommand(CommandSender sender, Command cmd,
-			String commandlabel, String[] args) {
+	public boolean onCommand(final CommandSender sender, Command cmd,
+			String commandlabel, final String[] args) {
 
 		String command = "";
 
@@ -91,13 +91,13 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "Do '/fo materials' to get a list of materials!");
 					return true;
 				}
-				String worldName = findWorld(args[2]);
+				final String worldName = findWorld(args[2]);
 				if (worldName == null) {
 					sender.sendMessage(ChatColor.RED + "World '" + args[2]
 							+ "' could not be found!");
 					return true;
 				}
-				List<String> leaderboard = leaderBoard
+				final List<String> leaderboard = leaderBoard
 						.sortLeaderboard(leaderBoard.createLeaderboard(args[1],
 								worldName));
 
@@ -106,8 +106,17 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 							+ "This is not a valid leaderboard. Is the world logged?");
 					return true;
 				}
-				leaderBoard.showLeaderboard(leaderboard, sender, worldName,
-						args[1]);
+				
+				plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable()
+				{
+					
+					public void run() {
+
+						leaderBoard.showLeaderboard(leaderboard, sender, worldName,
+								args[1]);
+					}
+				});
+			
 				return true;
 			}
 		} // args.length = 3
@@ -223,11 +232,11 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 				showHelpPages(sender, 1);
 				return true;
 			} else if (args[0].equalsIgnoreCase("remove")) {
-				sender.sendMessage(ChatColor.RED + "Incorrect Command Usage."
+				sender.sendMessage(ChatColor.RED + "Incorrect command usage"
 						+ ChatColor.YELLOW + " /fo remove <player>");
 				return true;
 			} else if (args[0].equalsIgnoreCase("clear")) {
-				sender.sendMessage(ChatColor.RED + "Incorrect Command Usage."
+				sender.sendMessage(ChatColor.RED + "Incorrect command usage"
 						+ ChatColor.YELLOW + " /fo clear <player> <world>");
 				return true;
 			} else if (args[0].equalsIgnoreCase("donators")

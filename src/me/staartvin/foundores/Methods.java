@@ -3,7 +3,7 @@ package me.staartvin.foundores;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import me.staartvin.foundores.database.Database;
+import me.staartvin.foundores.database.DatabaseConnector.blockTypes;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -80,26 +80,21 @@ public class Methods {
 			world = worlds.get(0).getName();
 		}
 
-		Database database = plugin.getDatabase().find(Database.class).where()
-				.ieq("playerName", playerName).ieq("world", world).findUnique();
-
-		if (database == null) {
+		if (!plugin.getDatabaseConnector().isLogged(playerName, world)) {
 			sender.sendMessage(ChatColor.RED + "Player " + playerName
 					+ " is not logged on world '" + world + "'!");
 			return;
 		}
 
-		playerName = database.getPlayerName();
-
-		double b1 = database.getBrokenStone();
-		double b2 = database.getBrokenCoal();
-		double b3 = database.getBrokenIron();
-		double b4 = database.getBrokenRedstone();
-		double b5 = database.getBrokenGold();
-		double b6 = database.getBrokenLapisLazuli();
-		double b7 = database.getBrokenDiamond();
-		double b8 = database.getBrokenEmerald();
-		double b9 = database.getBrokenNetherQuartz();
+		double b1 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.STONE);
+		double b2 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.COAL);
+		double b3 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.IRON);
+		double b4 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.REDSTONE);
+		double b5 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.GOLD);
+		double b6 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.LAPIS_LAZULI);
+		double b7 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.DIAMOND);
+		double b8 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.EMERALD);
+		double b9 = plugin.getDatabaseConnector().getBrokenBlockCount(playerName, world, blockTypes.NETHER_QUARTZ);
 		double ba = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9;
 
 		double p1 = b1 / ba;

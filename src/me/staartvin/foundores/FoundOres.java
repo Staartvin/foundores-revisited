@@ -20,6 +20,7 @@ import me.staartvin.foundores.saves.SaveHandler;
 import me.staartvin.foundores.update.AutoUpdateTask;
 import me.staartvin.foundores.update.Updater;
 import me.staartvin.foundores.update.Updater.UpdateResult;
+import me.staartvin.foundores.uuid.UUIDManager;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -40,6 +41,7 @@ public class FoundOres extends JavaPlugin {
 	private SaveHandler saveHandler = new SaveHandler(this);
 	private AnnounceHandler announceHandler = new AnnounceHandler(this);
 	private BlockBreakListener blockBreakListener;
+	private UUIDManager uuidManager = new UUIDManager();
 	
 	public ArrayList<String> loggedActions = new ArrayList<String>();
 	private Updater updater;
@@ -241,5 +243,13 @@ public class FoundOres extends JavaPlugin {
 	
 	public void hasReceived(boolean status) {
 		
+	}
+
+	public UUIDManager getUUIDManager() {
+		return uuidManager;
+	}
+
+	public void setUUIDManager(UUIDManager uuidManager) {
+		this.uuidManager = uuidManager;
 	}
 }

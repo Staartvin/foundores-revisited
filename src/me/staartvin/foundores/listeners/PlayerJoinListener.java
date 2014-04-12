@@ -20,13 +20,13 @@ public class PlayerJoinListener implements Listener {
 	@EventHandler
 	protected void onPlayerJoin(final PlayerJoinEvent event) {
 		World world = event.getPlayer().getLocation().getWorld();
-		if (!plugin.getDatabaseConnector().isLogged(event.getPlayer().getName(), world.getName())) {
+		if (!plugin.getDatabaseConnector().isLogged(event.getPlayer(), world.getName())) {
 			plugin.getLoggerClass().logVerbose("I don't recognise "
 					+ event.getPlayer().getName() + "!");
 			plugin.getLoggerClass().logVerbose("Creating info about "
 					+ event.getPlayer().getName() + "...");
 			for (World worlds : plugin.getServer().getWorlds()) {
-				plugin.getDatabaseConnector().createNewEntry(event.getPlayer().getName(),
+				plugin.getDatabaseConnector().createNewEntry(event.getPlayer(),
 						worlds.getName());
 			}
 		}
