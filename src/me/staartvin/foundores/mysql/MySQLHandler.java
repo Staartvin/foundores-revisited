@@ -2,9 +2,9 @@ package me.staartvin.foundores.mysql;
 
 import java.util.UUID;
 
-import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.database.DatabaseConnector.blockTypes;
+import me.staartvin.foundores.util.FileLogger.eventTypes;
 
 /**
  * @author Staartvin

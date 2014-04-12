@@ -3,7 +3,6 @@ package me.staartvin.foundores;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.announcer.AnnounceHandler;
 import me.staartvin.foundores.announcer.AnnounceTask;
 import me.staartvin.foundores.api.API;
@@ -20,7 +19,12 @@ import me.staartvin.foundores.saves.SaveHandler;
 import me.staartvin.foundores.update.AutoUpdateTask;
 import me.staartvin.foundores.update.Updater;
 import me.staartvin.foundores.update.Updater.UpdateResult;
-import me.staartvin.foundores.uuid.UUIDManager;
+import me.staartvin.foundores.util.FileLogger;
+import me.staartvin.foundores.util.Logger;
+import me.staartvin.foundores.util.Methods;
+import me.staartvin.foundores.util.OreRatios;
+import me.staartvin.foundores.util.FileLogger.eventTypes;
+import me.staartvin.foundores.util.uuid.UUIDManager;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -47,7 +51,7 @@ public class FoundOres extends JavaPlugin {
 	private Updater updater;
 	//private BukkitTask autoUpdateTask;
 
-	long firstTime, lastTime, finalTime;
+	public long firstTime, lastTime, finalTime;
 
 	public void onDisable() {
 		//saves.save(null, true, true, null);

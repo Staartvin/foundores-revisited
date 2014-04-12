@@ -3,9 +3,9 @@ package me.staartvin.foundores.commands;
 import java.util.List;
 
 import me.staartvin.foundores.FoundOres;
-import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.leaderboard.LeaderboardClass;
 import me.staartvin.foundores.report.CreateReportTask;
+import me.staartvin.foundores.util.FileLogger.eventTypes;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;

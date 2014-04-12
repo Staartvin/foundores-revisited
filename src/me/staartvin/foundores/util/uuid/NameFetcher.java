@@ -1,4 +1,4 @@
-package me.staartvin.foundores.uuid;
+package me.staartvin.foundores.util.uuid;
 
 import com.google.common.collect.ImmutableList;
 import org.json.simple.JSONObject;

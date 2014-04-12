@@ -1,8 +1,9 @@
-package me.staartvin.foundores;
+package me.staartvin.foundores.util;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
+import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.database.DatabaseConnector.blockTypes;
 
 import org.bukkit.ChatColor;

@@ -2,7 +2,7 @@ package me.staartvin.foundores.listeners;
 
 import java.util.HashMap;
 
-import me.staartvin.foundores.FileLogger.eventTypes;
+import me.staartvin.foundores.util.FileLogger.eventTypes;
 import me.staartvin.foundores.FoundOres;
 
 import org.bukkit.ChatColor;

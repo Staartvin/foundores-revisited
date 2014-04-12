@@ -1,4 +1,4 @@
-package me.staartvin.foundores;
+package me.staartvin.foundores.util;
 
 public class OreRatios {
 

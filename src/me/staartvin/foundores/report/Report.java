@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 
-import me.staartvin.foundores.FileLogger.eventTypes;
 import me.staartvin.foundores.FoundOres;
 import me.staartvin.foundores.database.Database;
 import me.staartvin.foundores.database.DatabaseConnector.blockTypes;
+import me.staartvin.foundores.util.FileLogger.eventTypes;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

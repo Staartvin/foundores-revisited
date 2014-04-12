@@ -1,4 +1,4 @@
-package me.staartvin.foundores.uuid;
+package me.staartvin.foundores.util.uuid;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,6 +1,8 @@
-package me.staartvin.foundores;
+package me.staartvin.foundores.util;
 
 import java.util.logging.Level;
+
+import me.staartvin.foundores.FoundOres;
 
 /**
  * This class outputs text in the console in real time.
@@ -11,7 +13,7 @@ public class Logger {
 
 	FoundOres plugin;
 
-	protected Logger(FoundOres plugin) {
+	public Logger(FoundOres plugin) {
 		this.plugin = plugin;
 	}
 	

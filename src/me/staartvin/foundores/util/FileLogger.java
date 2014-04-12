@@ -1,4 +1,4 @@
-package me.staartvin.foundores;
+package me.staartvin.foundores.util;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import me.staartvin.foundores.FoundOres;
 
 /**
  * This class logs all actions to a file (logfile.yml). These messages will not be shown on the console.
@@ -18,7 +20,7 @@ public class FileLogger {
 
 	FoundOres plugin;
 	
-	protected FileLogger(FoundOres plugin) {
+	public FileLogger(FoundOres plugin) {
 		this.plugin = plugin;
 	}
 	Calendar calendar = Calendar.getInstance();
