@@ -26,6 +26,7 @@ public class FoundOresCommandExecutor implements CommandExecutor {
 	private String[] materials = { "stone", "coal", "iron", "gold", "redstone",
 			"lapislazuli", "diamond", "emerald", "netherquartz" };
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(final CommandSender sender, Command cmd,
 			String commandlabel, final String[] args) {
 
